@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% block content%}
-{% if current_user.is_authenticated %}  {# ログインしている場合に表示 #}
+{% block content %}
+{% if current_user.is_authenticated %}
 <h2>Create</h2>
-<form action="{{ url_for('index') }}" method="post">
+<form action="{{ url_for('reply', message_id=message_id) }}" method="post">
     <div>Message:</div>
     <div><textarea name="content" placeholder="今の気分はいかがですか？"></textarea></div>
     <div><input type="submit" value="Create" /></div>
 </form>
 {% endif %}
 
-<h2>一覧</h2>
+<h2>返信一覧</h2>
 <ul>
     {% for message in messages %}
     <div class="message">
@@ -23,9 +23,7 @@
             </form>
             {% endif %}
             <div class="message-content">
-                <a href="{{ url_for('show', message_id=message.id) }}">
                 {{ message.content }}
-                </a>
             </div>
         </li>
     </div>
